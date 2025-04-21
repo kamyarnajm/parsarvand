@@ -1,200 +1,187 @@
 <!DOCTYPE html>
 <html lang="fa">
 <head>
-    <meta charset="UTF-8">
-    <title>پارس اروند الکتریک</title>
-    <style>
-        body {
-            margin: 0;
-            background: #d8eafd;
-            font-family: sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .machine {
-            width: 400px;
-            height: 600px;
-            background: linear-gradient(#007BFF, #004a9f);
-            border-radius: 30px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.3);
-            padding: 20px;
-            position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: space-between;
-        }
-        .logo {
-            position: absolute;
-            top: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 120px;
-            border-radius: 15px;
-            background: white;
-            padding: 8px;
-        }
-        .window {
-            background: #fff;
-            border: 4px solid #005dc1;
-            border-radius: 15px;
-            display: flex;
-            overflow: hidden;
-            width: 330px;
-            height: 150px;
-            margin-top: 150px;
-        }
-        .reel {
-            width: 33.33%;
-            height: 100%;
-            position: relative;
-            overflow: hidden;
-            border-left: 1px solid #ccc;
-            border-right: 1px solid #ccc;
-        }
-        .reel-inner {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            transition: top 2s ease-out;
-        }
-        .symbol {
-            height: 150px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        button {
-            background: #ffd700;
-            color: black;
-            border: none;
-            border-radius: 20px;
-            padding: 10px 30px;
-            font-size: 18px;
-            font-weight: bold;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-            cursor: pointer;
-        }
-        /* طراحی جدید دستگیره */
-        .lever {
-            position: absolute;
-            right: -30px;
-            top: 180px;
-            width: 20px;
-            height: 120px;
-            background: #888;
-            border-radius: 10px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .lever::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            width: 10px;
-            height: 100%;
-            background: #888;
-            border-radius: 5px;
-        }
-        .lever-ball {
-            position: absolute;
-            top: 40px; /* موقعیت اولیه دایره */
-            width: 40px;
-            height: 40px;
-            background: red;
-            border-radius: 50%;
-            box-shadow: inset 0 0 5px #000;
-            transition: top 0.3s ease-out;
-        }
-        .result {
-            color: white;
-            font-size: 20px;
-            margin-top: 10px;
-            font-weight: bold;
-            height: 30px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>پارس اروند الکتریک</title>
+  <style>
+    body {
+      margin: 0;
+      background: #d8eafd;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .machine {
+      width: 400px;
+      height: 600px;
+      background: linear-gradient(#007BFF, #004a9f);
+      border-radius: 30px;
+      box-shadow: 0 0 30px rgba(0,0,0,0.3);
+      padding: 20px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 120px;
+      border-radius: 15px;
+      background: white;
+      padding: 8px;
+    }
+    .window {
+      background: #fff;
+      border: 4px solid #005dc1;
+      border-radius: 15px;
+      display: flex;
+      overflow: hidden;
+      width: 330px;
+      height: 150px;
+      margin-top: 150px;
+    }
+    .reel {
+      width: 33.33%;
+      height: 100%;
+      position: relative;
+      overflow: hidden;
+      border-left: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+    }
+    .reel-inner {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      transition: top 2s ease-out;
+    }
+    .symbol {
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    button {
+      background: #ffd700;
+      color: black;
+      border: none;
+      border-radius: 20px;
+      padding: 10px 30px;
+      font-size: 18px;
+      font-weight: bold;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+      cursor: pointer;
+    }
+    .lever {
+      position: absolute;
+      right: -30px;
+      top: 180px;
+      width: 20px;
+      height: 120px;
+      background: #888;
+      border-radius: 10px;
+    }
+    .lever-ball {
+      position: absolute;
+      left: -10px;
+      width: 40px;
+      height: 40px;
+      background: red;
+      border-radius: 50%;
+      bottom: -20px;
+      transition: bottom 0.4s ease;
+      box-shadow: inset 0 0 5px #000;
+    }
+    .result {
+      color: white;
+      font-size: 20px;
+      margin-top: 10px;
+      font-weight: bold;
+      height: 30px;
+    }
+  </style>
 </head>
 <body>
-    <div class="machine">
-        <img class="logo" src="https://s6.uupload.ir/files/1000063431_gtyy.jpg" alt="لوگو">
-        <div class="window">
-            <div class="reel"><div id="reel1" class="reel-inner"></div></div>
-            <div class="reel"><div id="reel2" class="reel-inner"></div></div>
-            <div class="reel"><div id="reel3" class="reel-inner"></div></div>
-        </div>
-        <button id="spinButton">بچرخون!</button>
-        <div class="result" id="result"></div>
-        <div class="lever">
-            <div class="lever-ball"></div>
-        </div>
+  <div class="machine">
+    <img class="logo" src="https://s6.uupload.ir/files/0002_78l.png" alt="لوگو">
+    <div class="window">
+      <div class="reel"><div id="reel1" class="reel-inner"></div></div>
+      <div class="reel"><div id="reel2" class="reel-inner"></div></div>
+      <div class="reel"><div id="reel3" class="reel-inner"></div></div>
     </div>
-    <script>
-        const symbols = [
-            "https://s6.uupload.ir/files/screenshot_۲۰۲۵۰۴۱۶_۲۲۴۸۲۲_chrome_u5zm.jpg", // پیچگوشتی
-            "https://s6.uupload.ir/files/1000070286_3185.jpg", // لامپ برند
-            "https://s6.uupload.ir/files/screenshot_۲۰۲۵۰۴۱۶_۲۲۴۷۰۶_chrome_e1jq.jpg"  // باتری
-        ];
-        const reels = [
-            document.getElementById('reel1'),
-            document.getElementById('reel2'),
-            document.getElementById('reel3')
-        ];
-        const resultDiv = document.getElementById('result');
-        const leverBall = document.querySelector('.lever-ball'); // گرفتن دایره قرمز
+    <button id="spinButton">بچرخون!</button>
+    <div class="result" id="result"></div>
+    <div class="lever"><div class="lever-ball" id="leverBall"></div></div>
+  </div>
 
-        function spinReel(reel) {
-            reel.innerHTML = '';
-            let selectedIndex = Math.floor(Math.random() * symbols.length);
-            for (let i = 0; i < 10; i++) {
-                const div = document.createElement('div');
-                div.className = 'symbol';
-                const img = document.createElement('img');
-                img.src = symbols[Math.floor(Math.random() * symbols.length)];
-                img.width = 100;
-                div.appendChild(img);
-                reel.appendChild(div);
-            }
-            // عنصر آخر، همونیه که نمایش داده میشه
-            const finalDiv = document.createElement('div');
-            finalDiv.className = 'symbol';
-            const finalImg = document.createElement('img');
-            finalImg.src = symbols[selectedIndex];
-            finalImg.width = 100;
-            finalDiv.appendChild(finalImg);
-            reel.appendChild(finalDiv);
-            reel.setAttribute("data-final", symbols[selectedIndex]);
-            reel.style.transition = "none";
-            reel.style.top = "0px";
-            setTimeout(() => {
-                reel.style.transition = "top 2s ease-out";
-                reel.style.top = "-1500px";
-            }, 50);
-        }
+  <script>
+    const symbols = [
+      "https://s6.uupload.ir/files/whatsapp_image_2025-04-21_at_16.53.26_(1)_n7tz.jpeg",  // اولی
+      "https://s6.uupload.ir/files/whatsapp_image_2025-04-21_at_16.53.26_wmqx.jpeg",      // دومی
+      "https://s6.uupload.ir/files/whatsapp_image_2025-04-21_at_16.51.07_pkua.jpeg"       // سومی
+    ];
+    const reels = [
+      document.getElementById('reel1'),
+      document.getElementById('reel2'),
+      document.getElementById('reel3')
+    ];
+    const resultDiv = document.getElementById('result');
+    const leverBall = document.getElementById('leverBall');
 
-        function checkWinner() {
-            const finals = reels.map(r => r.getAttribute("data-final"));
-            if (finals[0] === finals[1] && finals[1] === finals[2]) {
-                resultDiv.innerText = "برنده شدی!";
-            } else {
-                resultDiv.innerText = "";
-            }
-        }
+    function spinReel(reel) {
+      reel.innerHTML = '';
+      let selectedIndex = Math.floor(Math.random() * symbols.length);
+      for (let i = 0; i < 10; i++) {
+        const div = document.createElement('div');
+        div.className = 'symbol';
+        const img = document.createElement('img');
+        img.src = symbols[Math.floor(Math.random() * symbols.length)];
+        img.width = 100;
+        div.appendChild(img);
+        reel.appendChild(div);
+      }
+      const finalDiv = document.createElement('div');
+      finalDiv.className = 'symbol';
+      const finalImg = document.createElement('img');
+      finalImg.src = symbols[selectedIndex];
+      finalImg.width = 100;
+      finalDiv.appendChild(finalImg);
+      reel.appendChild(finalDiv);
+      reel.setAttribute("data-final", symbols[selectedIndex]);
+      reel.style.transition = "none";
+      reel.style.top = "0px";
+      setTimeout(() => {
+        reel.style.transition = "top 2s ease-out";
+        reel.style.top = "-1500px";
+      }, 50);
+    }
 
-        document.getElementById('spinButton').addEventListener('click', () => {
-            resultDiv.innerText = "";
-            // حرکت دایره قرمز به سمت بالا و پایین
-            leverBall.style.top = '20px'; // حرکت دایره قرمز به بالا
-            reels.forEach(spinReel);
-            setTimeout(() => {
-                checkWinner();
-                leverBall.style.top = '40px'; // بازگشت دایره قرمز به موقعیت اولیه
-            }, 2100);
-        });
-    </script>
+    function checkWinner() {
+      const finals = reels.map(r => r.getAttribute("data-final"));
+      if (finals[0] === finals[1] && finals[1] === finals[2]) {
+        resultDiv.innerText = "برنده شدی!";
+      } else {
+        resultDiv.innerText = "باختی!";
+      }
+    }
+
+    document.getElementById('spinButton').addEventListener('click', () => {
+      resultDiv.innerText = "";
+      leverBall.style.bottom = "0px";
+      setTimeout(() => {
+        leverBall.style.bottom = "-20px";
+      }, 300);
+      reels.forEach(spinReel);
+      setTimeout(() => {
+        checkWinner();
+      }, 2100);
+    });
+  </script>
 </body>
 </html>
